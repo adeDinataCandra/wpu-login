@@ -1,20 +1,23 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+
 class User_model extends CI_Model
 {
 
-    public function insert()
+    public function create()
     {
-        $data = [
-            'name' => $this->input->post('name'),
+        $data = array(
+
+            'name' => $this->input->post('nama'),
             'email' => $this->input->post('email'),
             'image' => 'default.jpg',
-            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'password' => hash('ripemd160', $this->input->post('password1')),
             'role_id' => 2,
             'is_active' => 1,
             'date_created' => time()
-        ];
+
+        );
 
         $this->db->insert('user', $data);
+        return true;
     }
 }
