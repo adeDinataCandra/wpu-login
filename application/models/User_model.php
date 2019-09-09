@@ -16,6 +16,5 @@ class User_model extends CI_Model
         ];
 
         $this->db->insert('user', $data);
-        redirect('auth');
     }
 }

@@ -7,7 +7,8 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('user_model');
+        $this->load->model('User_model');
+        $this->load->helper('url_helper');
     }
 
     public function index()
@@ -19,12 +20,13 @@ class Auth extends CI_Controller
 
     public function registration()
     {
+        var_dump($this->input->post);
+        die;
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]');
-        $this->form_validation->set_rules('pasword1', 'Password', 'required|trim|min_length[3]|matches[password2]');
+        $this->form_validation->set_rules('password1', 'Password', 'required', array('required' => 'Kamu harus mengisi password'));
 
-        $this->form_validation->set_rules('pasword2', 'Password', 'required|trim');
-
+        $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|matches[password1]', array('required' => 'Kamu harus mengisi konfirmasi dengan benar'));
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Wpu User Registration';
@@ -32,7 +34,7 @@ class Auth extends CI_Controller
             $this->load->view('auth/register');
             $this->load->view('templates/auth_footer');
         } else {
-            $this->User_model->insert();
+            $this->user_model->insert();
             redirect('auth');
         }
     }
