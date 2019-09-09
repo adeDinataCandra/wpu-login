@@ -11,7 +11,7 @@
                             <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                         </div>
 
-                        <form class="user" method="post" action="">
+                        <form class="user" method="post" action="<?= base_url('auth/registration'); ?>">
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-user" id="name" name="name" placeholder="Full Name....">
 
@@ -39,15 +39,13 @@
                             <button type="submit" class="btn btn-primary btn-user btn-block">
                                 Register Account
                             </button>
-
-                        </form>
-                        <hr>
-                        <div class="text-center">
-                            <a class="small" href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                        <div class="text-center">
-                            <a class="small" href="<?= base_url('auth'); ?>">Already have an account? Login!</a>
-                        </div>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="<?= base_url('auth'); ?>">Already have an account? Login!</a>
+                            </div>
                         </form>
                     </div>
                 </div>
