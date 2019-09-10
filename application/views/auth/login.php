@@ -18,10 +18,12 @@
 
                             <form class="user" method="post" action"">
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                    <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." value="<?= set_value('email'); ?>">
+                                    <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                    <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
 
                         </div>

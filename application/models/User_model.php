@@ -7,10 +7,10 @@ class User_model extends CI_Model
     {
         $data = array(
 
-            'name' => $this->input->post('nama'),
-            'email' => $this->input->post('email'),
+            'name' => htmlspecialchars($this->input->post('nama', true)),
+            'email' => htmlspecialchars($this->input->post('email', true)),
             'image' => 'default.jpg',
-            'password' => hash('ripemd160', $this->input->post('password1')),
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT ),
             'role_id' => 2,
             'is_active' => 1,
             'date_created' => time()
@@ -19,5 +19,41 @@ class User_model extends CI_Model
 
         $this->db->insert('user', $data);
         return true;
+    }
+
+    public function login()
+    {
+
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+        //jika usernya ada
+        if($user){
+            //jika user aktif
+            if($user['is_active'] == 1){
+                //cek password
+                if(password_verify($password, $user['password']) ){
+                    $data = [
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id']
+                    ];
+                    $this->session->set_userdata($data);
+                }else{
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!
+                </div>');
+                redirect('auth');
+                }
+
+            }else{
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">This Email Has not been activated!
+                </div>');
+                redirect('auth');
+            }
+        }else{
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not register
+          </div>');
+        }
     }
 }

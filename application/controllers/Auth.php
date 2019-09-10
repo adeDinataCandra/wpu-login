@@ -12,10 +12,20 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        $data['title'] = "Login Page";
-        $this->load->view('templates/auth_header', $data);
-        $this->load->view('auth/login');
-        $this->load->view('templates/auth_footer');
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Login Page";
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/login');
+            $this->load->view('templates/auth_footer');
+        } else {
+            //validation success
+            $this->User_model->login();
+            redirect('user');
+        }
     }
 
     public function registration()
@@ -40,7 +50,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password2', 'Password Confirmation', 'required|matches[password1]');
 
         if ($this->form_validation->run() === FALSE) {
-            $data['title'] = "Halaman Registrasi";
+            $data['title'] = "Registration Page";
             $this->load->view('templates/auth_header', $data);
             $this->load->view('auth/register');
             $this->load->view('templates/auth_footer');
@@ -50,5 +60,15 @@ class Auth extends CI_Controller
           </div>');
             redirect('auth');
         }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You Have Been Logout
+          </div>');
+        redirect('auth');
     }
 }
