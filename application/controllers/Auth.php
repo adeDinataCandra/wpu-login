@@ -24,9 +24,9 @@ class Auth extends CI_Controller
         } else {
             //validation success
             $this->User_model->login();
-            redirect('user');
         }
     }
+
 
     public function registration()
     {
