@@ -40,8 +40,8 @@
                             <td><?= $sm['icon']; ?></td>
                             <td><?= $sm['is_active']; ?></td>
                             <td>
-                                <a class="badge badge-pill badge-success" href="">Edit</a>
-                                <a class="badge badge-pill badge-danger" href="">Delete</a>
+                                <a class="badge badge-pill badge-success" href=""><i class="far fa-edit"></i></a>
+                                <a class="badge badge-pill badge-danger" href=""><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                         <?php $i++ ?>

@@ -59,4 +59,16 @@ class Menu extends CI_Controller
             redirect('menu/submenu');
         }
     }
+
+    public function delete($id)
+    {
+        $this->Menu_model->deleteMenu($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data has delete!</div>');
+        redirect('menu');
+    }
+
+    public function update($id)
+    {
+        echo json_encode($this->Menu_model->getMenuById($_POST['id']));
+    }
 }

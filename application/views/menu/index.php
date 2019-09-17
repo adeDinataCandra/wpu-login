@@ -13,7 +13,8 @@
 
             <?= $this->session->flashdata('message'); ?>
 
-            <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+            <a href="" class="btn btn-primary mb-3 tombolTambahData" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -29,8 +30,8 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a class="badge badge-pill badge-success" href="">Edit</a>
-                                <a class="badge badge-pill badge-danger" href="">Delete</a>
+                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#newMenuModal" href="<?= base_url('menu/update/') . $m['id']; ?>" data-id="<?= $m['id']; ?>">Edit</a>
+                                <a class="badge badge-pill badge-danger" href="<?= base_url('menu/delete/') . $m['id']; ?>" onclick="return confirm('yakin ?'); ">Delete</a>
                             </td>
                         </tr>
                         <?php $i++ ?>
@@ -57,7 +58,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newMenuModal">Add New Menu</h5>
+                <h5 class="modal-title" id="formModalLabel">Add New Menu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

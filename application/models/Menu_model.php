@@ -36,4 +36,17 @@ class Menu_model extends CI_Model
         );
         $this->db->insert('user_sub_menu', $data);
     }
+
+    public function deleteMenu($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('user_menu');
+    }
+
+    public function getMenuById($id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
+        $this->db->bind('id', $id);
+        return $this->db->single();
+    }
 }
