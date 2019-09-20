@@ -43,10 +43,17 @@ class Menu_model extends CI_Model
         $this->db->delete('user_menu');
     }
 
-    public function getMenuById($id)
+    public function getMenuById($kobar)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
-        $this->db->bind('id', $id);
-        return $this->db->single();
+        $hsl = $this->db->query("SELECT * FROM user_menu WHERE id='$kobar'");
+        if ($hsl->num_rows() > 0) {
+            foreach ($hsl->result() as $data) {
+                $hasil = array(
+                    'menu' => $data->menu,
+
+                );
+            }
+        }
+        return $hasil;
     }
 }

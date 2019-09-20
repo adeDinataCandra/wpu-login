@@ -13,7 +13,7 @@
 
             <?= $this->session->flashdata('message'); ?>
 
-            <a href="" class="btn btn-primary mb-3 tombolTambahData" data-toggle="modal" data-target="#newMenuModal">Add New Menu</a>
+            <a href="" class="btn btn-primary mb-3 tombolTambahData" data-toggle="modal" data-target="#formModal">Add New Menu</a>
 
             <table class="table table-hover">
                 <thead>
@@ -23,15 +23,16 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="show_data">
                     <?php $i = 1;  ?>
                     <?php foreach ($menu as $m) : ?>
                         <tr>
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#newMenuModal" href="<?= base_url('menu/update/') . $m['id']; ?>" data-id="<?= $m['id']; ?>">Edit</a>
+                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#formModal" href="<?= $m['id']; ?>" data-id="<?= $m['id']; ?>">Edit</a>
                                 <a class="badge badge-pill badge-danger" href="<?= base_url('menu/delete/') . $m['id']; ?>" onclick="return confirm('yakin ?'); ">Delete</a>
+                                <a class="badge badge-pill badge-primary" href="<?= base_url('menu/detailMenu/') . $m['id']; ?>">Detail</a>
                             </td>
                         </tr>
                         <?php $i++ ?>
@@ -53,28 +54,30 @@
   Launch demo modal
 </button> -->
 
-<!-- Modal -->
-<div class="modal fade" id="newMenuModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- MODAL ADD -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="formModalLabel">Add New Menu</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="formModalLabel">Tambah Menu</h5>
             </div>
-
-            <form action="<?= base_url('menu'); ?>" method="post">
+            <form class="form-horizontal" action="<?= base_url('menu'); ?>" method="post">
                 <div class="modal-body">
+
                     <div class="form-group">
-                        <input type="text" class="form-control" id="menu" name="menu" placeholder="Menu name">
+                        <label class="control-label col-xs-3">Menu</label>
+                        <div class="col-xs-9">
+                            <input name="menu" id="menu" class="form-control" type="text" placeholder="Menu" style="width:335px;" required>
+                        </div>
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                    <button type="submit" class="btn btn-info" id="btn_simpan">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<!--END MODAL ADD-->

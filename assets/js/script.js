@@ -9,22 +9,22 @@ $(function () {
 
     $('.tampilModalUbah').on('click', function () {
 
-        $('#formModalLabel').html('Update Menu');
-        $('.modal-footer button[type=submit]').html('Update Menu');
+        $('#formModalLabel').html('Edit Menu');
+        $('.modal-footer button[type=submit]').html('Edit Menu');
 
         const id = $(this).data('id');
 
         $.ajax({
 
-            url: '<?= base_',
+            url: "<?= base_url('menu/detailMenu')?>",
             data: { id: id },
-            method: 'post',
-            dataType: 'json',
+            method: "post",
+            dataType: "json",
             success: function (data) {
+                // $('#nama').val(data.nama);
                 $('#menu').val(data.menu);
 
             }
-
 
         });
 

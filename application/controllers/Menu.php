@@ -67,8 +67,13 @@ class Menu extends CI_Controller
         redirect('menu');
     }
 
-    public function update($id)
+    public function detailMenu()
     {
-        echo json_encode($this->Menu_model->getMenuById($_POST['id']));
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $kobar = $this->input->post('id');
+        $data = $this->menu_model->getMenuById($kobar);
+        echo json_encode($data);
     }
 }
