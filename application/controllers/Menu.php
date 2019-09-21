@@ -69,11 +69,13 @@ class Menu extends CI_Controller
 
     public function detailMenu()
     {
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+        echo 'oke';
 
-        $kobar = $this->input->post('id');
-        $data = $this->menu_model->getMenuById($kobar);
-        echo json_encode($data);
+        // $data['user'] = $this->db->get_where('user', ['email' =>
+        // $this->session->userdata('email')])->row_array();
+
+        // $kobar = $this->input->get('id');
+        // $data = $this->menu_model->getMenuById($kobar);
+        // echo json_encode($data);
     }
 }

@@ -30,7 +30,7 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#formModal" href="<?= $m['id']; ?>" data-id="<?= $m['id']; ?>">Edit</a>
+                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#formModal" href="<?= base_url('menu/update/') . $m['id']; ?>" data-id="<?= $m['id']; ?>">Edit</a>
                                 <a class="badge badge-pill badge-danger" href="<?= base_url('menu/delete/') . $m['id']; ?>" onclick="return confirm('yakin ?'); ">Delete</a>
                                 <a class="badge badge-pill badge-primary" href="<?= base_url('menu/detailMenu/') . $m['id']; ?>">Detail</a>
                             </td>
@@ -81,3 +81,16 @@
     </div>
 </div>
 <!--END MODAL ADD-->
+
+<script>
+    $(function() {
+        $('.tombolTambahData').on('click', function() {
+            $('.formModalLabel').html('Add Menu');
+            $('.modal-footer button[type=submit]').html('add menu');
+        });
+        $('.tampilModalUbah').on('click', function() {
+            $('.formModalLabel').html('Update Menu');
+            $('.modal-footer button[type=submit]').html('Update menu');
+        });
+    });
+</script>
