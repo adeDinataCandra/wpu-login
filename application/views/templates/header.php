@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{csrf-token()}}" />
+
 
     <title><?= $title; ?></title>
 
@@ -18,22 +20,21 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets'); ?>/css/sb-admin-2.min.css" rel="stylesheet">
 
-
-
 </head>
 
-<!-- Bootstrap core JavaScript-->
-<script src="<?= base_url('assets'); ?>/vendor/jquery/jquery.min.js"></script>
-
-<script src="<?= base_url('assets'); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="<?= base_url('assets'); ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="<?= base_url('assets'); ?>/js/sb-admin-2.min.js"></script>
-
 <body id="page-top">
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?= base_url('assets'); ?>/vendor/jquery/jquery.min.js"></script>
+
+    <script src="<?= base_url('assets'); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="<?= base_url('assets'); ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<?= base_url('assets'); ?>/js/sb-admin-2.min.js"></script>
+    <script src="<?= base_url('assets'); ?>/js/script.js"></script>
 
     <!-- Page Wrapper -->
     <div id="wrapper">

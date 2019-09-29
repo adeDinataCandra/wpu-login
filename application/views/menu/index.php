@@ -30,19 +30,15 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#formModal" href="<?= base_url('menu/update/') . $m['id']; ?>" data-id="<?= $m['id']; ?>">Edit</a>
-                                <a class="badge badge-pill badge-danger" href="<?= base_url('menu/delete/') . $m['id']; ?>" onclick="return confirm('yakin ?'); ">Delete</a>
-                                <a class="badge badge-pill badge-primary" href="<?= base_url('menu/detailMenu/') . $m['id']; ?>">Detail</a>
-                            </td>
+                                <a class="badge badge-pill badge-success tampilModalUbah" data-toggle="modal" data-target="#formModal" href="<?= base_url('menu/update/') . $m['id']; ?>" data-id="<?= $m['id']; ?>"><i class="far fa-edit"></i></a>
+                                <a class="badge badge-pill badge-danger" href="<?= base_url('menu/delete/') . $m['id']; ?>" onclick="return confirm('yakin ?'); "><i class="fas fa-trash-alt"></i></a> </td>
                         </tr>
                         <?php $i++ ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <!-- /.container-fluid -->
+    </div> <!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
@@ -61,21 +57,21 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="formModalLabel">Tambah Menu</h5>
             </div>
-            <form class="form-horizontal" action="<?= base_url('menu'); ?>" method="post">
-                <div class="modal-body">
-
+            <div class="modal-body">
+                <form action="<?= base_url('menu'); ?>" method="post">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <label class="control-label col-xs-3">Menu</label>
                         <div class="col-xs-9">
                             <input name="menu" id="menu" class="form-control" type="text" placeholder="Menu" style="width:335px;" required>
                         </div>
                     </div>
-                </div>
+            </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
-                    <button type="submit" class="btn btn-info" id="btn_simpan">Simpan</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                <button type="submit" class="btn btn-info" id="btn_simpan">Simpan</button>
+            </div>
             </form>
         </div>
     </div>
@@ -85,12 +81,30 @@
 <script>
     $(function() {
         $('.tombolTambahData').on('click', function() {
-            $('.formModalLabel').html('Add Menu');
+            $('#formModalLabel').html('Add Menu');
             $('.modal-footer button[type=submit]').html('add menu');
         });
         $('.tampilModalUbah').on('click', function() {
-            $('.formModalLabel').html('Update Menu');
+            $('#formModalLabel').html('Update Menu');
             $('.modal-footer button[type=submit]').html('Update menu');
+            $('.modal-body form').attr('action', '<?= base_url('menu/ubah'); ?>');
+
+            const id = $(this).data('id');
+
+            $.ajax({
+                url: "<?= base_url('menu/detailMenu') ?>",
+                data: {
+                    id: id
+                },
+                method: 'post',
+                dataType: 'json',
+                success: function(data) {
+                    $('#menu').val(data.menu);
+                    $('#id').val(data.id);
+                }
+
+
+            })
         });
     });
 </script>

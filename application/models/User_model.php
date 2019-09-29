@@ -58,6 +58,7 @@ class User_model extends CI_Model
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not register
           </div>');
+            redirect('auth');
         }
     }
 }
