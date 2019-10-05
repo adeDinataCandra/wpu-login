@@ -1,10 +1,11 @@
 <?php
 
-//membuat fungsi helper untuk malkaukan block akses kepada user yang tidakmemiliki session hak aksesnya.
+//membuat fungsi helper untuk malkaukan block akses kepada user yang sembarang mengakses url menu.
 
 function is_logged_in()
 {
     $ci = get_instance();
+
     if (!$ci->session->userdata('email')) {
         redirect('auth');
     } else {
@@ -22,6 +23,21 @@ function is_logged_in()
 
         if ($userAccess->num_rows() < 1) {
             redirect('auth/block');
+        }
+    }
+
+    //fungsi untuk melakukan check akses ketika check box di klik
+    function check_access($role_id, $menu_id)
+    {
+        $ci = get_instance();
+
+        $result =  $ci->db->get_where('user_access_menu', [
+            'role_id' => $role_id,
+            'menu_id' => $menu_id
+        ]);
+
+        if ($result->num_rows() > 0) {
+            return "checked='checked'";
         }
     }
 }

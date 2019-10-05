@@ -3,23 +3,6 @@
 class User_model extends CI_Model
 {
 
-    public function create()
-    {
-        $data = array(
-
-            'name' => htmlspecialchars($this->input->post('nama', true)),
-            'email' => htmlspecialchars($this->input->post('email', true)),
-            'image' => 'default.jpg',
-            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-            'role_id' => 2,
-            'is_active' => 1,
-            'date_created' => time()
-
-        );
-
-        $this->db->insert('user', $data);
-        return true;
-    }
 
     public function login()
     {
@@ -60,5 +43,43 @@ class User_model extends CI_Model
           </div>');
             redirect('auth');
         }
+    }
+
+    public function updateUser()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $name = $this->input->post('name', true);
+        $email = $this->input->post('email', true);
+
+        //cek jika ada gambar yang akan di upload
+        $upload_image = $_FILES['image']['name'];
+
+        if ($upload_image) {
+            $config['upload_path'] = './assets/img/profile';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size']     = '2048';
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('image')) {
+
+                //menghapus gambar lama terlebih dahulu setelah update
+                $old_image = $data['user']['image'];
+                if ($old_image != 'default.jpg') {
+                    unlink(FCPATH . 'assets/img/profile/' . $old_image);
+                }
+                //melakukan insert data foto
+                $new_image = $this->upload->data('file_name');
+                $this->db->set('image', $new_image);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
+
+        $this->db->set('name', $name);
+        $this->db->where('email', $email);
+        $this->db->update('user');
     }
 }

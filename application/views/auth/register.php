@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="password" name="password1" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                <input type="password" name="password1" class="form-control form-control-user password-register1" id="exampleInputPassword" placeholder="Password">
                                 <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                             <div class="col-sm-6">
@@ -33,7 +33,7 @@
                     </form>
                     <hr>
                     <div class="text-center">
-                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                        <a class="small" href="<?= base_url('auth/forgotPassword'); ?>">Forgot Password?</a>
                     </div>
                     <div class="text-center">
                         <a class="small" href="<?= base_url('auth'); ?>">Already have an account? Login!</a>
